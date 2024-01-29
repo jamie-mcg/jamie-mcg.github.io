@@ -1,48 +1,50 @@
 {
   "basics": {
-    "name": "Albert Einstein",
-    "label": "Scientist",
+    "name": "Jamie McGowan",
+    "label": "Research Scientist",
     "image": "",
-    "email": "albert@einstein.de",
-    "phone": "(912) 123-4567",
-    "url": "https://alshedivat.github.io/al-folio/",
-    "summary": "A German-born theoretical physicist, widely ranked among the greatest and most influential scientists of all time",
+    "email": "jamie.mcgowan@mtkresearch.com",
+    "phone": "",
+    "url": "https://jamie-mcg.github.io/al-folio/",
+    "summary": "I am a Research Scientist in AI focussed on exploring topics in foundational AI. My research interests include topics surrounding optimisation, meta-learning, structured intelligence and challenges in representation learning. In addition, my research involves developing real-world applications of AI to solve engineering problems.",
     "location": {
-      "address": "2712 Broadway St",
-      "postalCode": "CA 94115",
-      "city": "San Francisco",
-      "countryCode": "US",
-      "region": "California"
+      "city": "London",
+      "countryCode": "UK",
+      "region": "England"
     },
     "profiles": [
       {
-        "network": "Twitter",
-        "username": "AlbertEinstein",
-        "url": "https://twitter.com/AlbertEinstein"
+        "network": "LinkedIn",
+        "username": "Jamie McGowan",
+        "url": "https://www.linkedin.com/in/jamiewmcgowan/"
+      },
+      {
+        "network": "GitHub",
+        "username": "jamie-mcg",
+        "url": "https://github.com/jamie-mcg"
       }
     ]
   },
   "work": [
     {
-      "name": "Institute for Advanced Study, Princeton University",
-      "position": "Professor of Theoretical Physics",
+      "name": "MediaTek Research",
+      "position": "Research Scientist",
       "url": "https://example.com",
-      "startDate": "1933-01-01",
-      "endDate": "1955-01-01",
-      "summary": "Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.",
-      "highlights": ["Relativity"]
+      "startDate": "2022-10-01",
+      "summary": "",
+      "highlights": ["Artificial Intelligence (AI)", "Research", "Applied Mathematics", "Deep Learning"]
+    },
+    {
+      "name": "University College London",
+      "position": "Research Scientist",
+      "url": "https://example.com",
+      "startDate": "2022-10-01",
+      "summary": "",
+      "highlights": ["Artificial Intelligence (AI)", "Research", "Applied Mathematics", "Deep Learning"]
     }
   ],
   "volunteer": [
-    {
-      "organization": "People's Climate March",
-      "position": "Lead Organizer",
-      "url": "https://example.com",
-      "startDate": "2014-04-01",
-      "endDate": "2015-07-01",
-      "summary": "Lead organizer for the New York City branch of the People's Climate March, the largest climate march in history.",
-      "highlights": ["Awarded 'Climate Hero' award by Greenpeace for my efforts organizing the march.", "Men of the year 2014 by Time magazine"]
-    }
+    
   ],
   "education": [
     {
