@@ -21,7 +21,7 @@ In the above figure, we see an illustrative example of the definition above. Her
 
 We can also see that if the opposite is true i.e. the enclosed area is below the curve, the function is concave!
 
-Indeed, a convex function $f(x)$ can be reflected into a concave function $-f(x)$.
+Indeed, a convex function $$f(x)$$ can be reflected into a concave function $$-f(x)$$.
 
 Mathematically, convexity is best described by Jensen's inequality,
 
@@ -54,9 +54,9 @@ Convex functions are no exception and can be further categorised with three prop
 
 Now, the further you move down that list, the stronger these properties become (hence the "strongly" term). This just means that the subset of convex functions that have these properties becomes smaller due to stronger constraints.
 
-So far in this post, we have been talking about convexity in its most general form, where $f^{''}(x) >= 0$. This is the condition for 'convex' functions.
+So far in this post, we have been talking about convexity in its most general form, where $$f^{''}(x) >= 0$$. This is the condition for 'convex' functions.
 
-Strictly convex functions are those which satisfy $f^{''}(x) > 0$, i.e. the curvature can never be 0.
+Strictly convex functions are those which satisfy $$f^{''}(x) > 0$$, i.e. the curvature can never be 0.
 
-Stongly convex functions are those which satisfy $f^{''}(x) >= m > 0$, where the curvature is non-vanishing and stays bounded below by some positive value $m$.
+Stongly convex functions are those which satisfy $$f^{''}(x) >= m > 0$$, where the curvature is non-vanishing and stays bounded below by some positive value $m$.
 
