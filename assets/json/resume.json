@@ -35,37 +35,72 @@
       "highlights": ["Artificial Intelligence (AI)", "Research", "Applied Mathematics", "Deep Learning"]
     },
     {
-      "name": "University College London",
-      "position": "Research Scientist",
+      "name": "UCL Centre for Data Intensive Science and Industry",
+      "position": "Postdoctoral Research Fellow",
       "url": "https://example.com",
-      "startDate": "2022-10-01",
+      "startDate": "2022-01-01",
+      "endDate": "2022-10-01",
       "summary": "",
-      "highlights": ["Artificial Intelligence (AI)", "Research", "Applied Mathematics", "Deep Learning"]
+      "highlights": ["Machine Learning", "Graph Neural Networks", "Recommender Systems", "Research Supervisison"]
+    },
+    {
+      "name": "University College London",
+      "position": "Postgraduate Researcher",
+      "url": "https://example.com",
+      "startDate": "2018-10-01",
+      "endDate": "2022-04-01",
+      "summary": "",
+      "highlights": ["Particle Physics", "Theoretical Physics", "Quantum Field Theory", "Collider Physics"]
+    },
+    {
+      "name": "MediaTek Research",
+      "position": "Research Intern",
+      "url": "https://example.com",
+      "startDate": "2020-06-01",
+      "endDate": "2020-10-01",
+      "summary": "",
+      "highlights": ["Representation Learning", "Meta-Learning", "Computer Vision", "Natural Language Processing"]
     }
   ],
   "volunteer": [
-    
+    {
+      "name": "The Alan Turing Institute",
+      "position": "Data Study Group Participant",
+      "url": "https://example.com",
+      "startDate": "2021-04-01",
+      "endDate": "2021-05-01",
+      "summary": "",
+      "highlights": ["Algorithmic Design", "Recommender Systems", "Machine Learning"]
+    },
+    {
+      "name": "University of Leeds",
+      "position": "Student Ambassador",
+      "url": "https://example.com",
+      "startDate": "2016-05-01",
+      "endDate": "2018-05-01",
+      "summary": "",
+      "highlights": ["Communication Skills", "Presentation Skills"]
+    }
   ],
   "education": [
     {
-      "institution": "University of Zurich, Zurich, Switzerland",
-      "location": "Zurich, Switzerland",
-      "url": "https://www.uzh.ch/",
-      "area": "Software Development",
+      "institution": "University College London",
+      "location": "London, UK",
+      "url": "",
+      "area": "Theoretical Physics",
       "studyType": "PhD",
-      "startDate": "1905-01-01",
-      "endDate": "1905-01-01",
-      "score": "10",
-      "courses": ["Theory of Relativity"]
+      "startDate": "2018-10-01",
+      "endDate": "2022-04-01",
+      "courses": ["Quantum Field Theory", "The Standard Model", "Accelerator & Collider Phsyics"]
     }
   ],
   "awards": [
     {
-      "title": "Nobel Prize in Physics",
-      "date": "1921-11-01",
-      "awarder": "Royal Swedish Academy of Sciences",
-      "url": "https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/",
-      "summary": "The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'"
+      "title": "High Energy Physics PhD Thesis Prize",
+      "date": "2023-12-01",
+      "awarder": "University College London",
+      "url": "",
+      "summary": ""
     }
   ],
   "certificates": [
