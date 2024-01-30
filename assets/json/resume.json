@@ -22,6 +22,11 @@
         "network": "GitHub",
         "username": "jamie-mcg",
         "url": "https://github.com/jamie-mcg"
+      },
+      {
+        "network": "Medium",
+        "username": "j-w-mcgowan18",
+        "url": "https://medium.com/@j-w-mcgowan18"
       }
     ]
   },
@@ -29,7 +34,7 @@
     {
       "name": "MediaTek Research",
       "position": "Research Scientist",
-      "url": "https://example.com",
+      "url": "https://i.mediatek.com/mediatekresearch",
       "startDate": "2022-10-01",
       "summary": "",
       "highlights": ["Artificial Intelligence (AI)", "Research", "Applied Mathematics", "Deep Learning"]
@@ -37,19 +42,19 @@
     {
       "name": "UCL Centre for Data Intensive Science and Industry",
       "position": "Postdoctoral Research Fellow",
-      "url": "https://example.com",
+      "url": "",
       "startDate": "2022-01-01",
       "endDate": "2022-10-01",
-      "summary": "",
+      "summary": "I received a funded fellowship position to work collaboratively with the Machine Learning team at ASOS building a system to predict customer returns using Graph Neural Networks. My responsibilities involved leading a small group of PhD students and MSc students who worked with me during this time.",
       "highlights": ["Machine Learning", "Graph Neural Networks", "Recommender Systems", "Research Supervisison"]
     },
     {
       "name": "University College London",
       "position": "Postgraduate Researcher",
-      "url": "https://example.com",
+      "url": "https://www.hep.ucl.ac.uk/",
       "startDate": "2018-10-01",
       "endDate": "2022-04-01",
-      "summary": "",
+      "summary": "My research involved computational modelling of a variety of unknown higher order functions in perturbation theory, describing quantum interactions within particle collisions. Subsequently, I developed a framework for fitting this approximate theory to datasets via Hessian methods to gain a handle on the theoretical uncertainties present in physical quantities calculated in quantum field theory.",
       "highlights": ["Particle Physics", "Theoretical Physics", "Quantum Field Theory", "Collider Physics"]
     },
     {
@@ -58,20 +63,46 @@
       "url": "https://example.com",
       "startDate": "2020-06-01",
       "endDate": "2020-10-01",
-      "summary": "",
+      "summary": "During this time, I worked on a Meta-Learning project based on an adaptation of the MAML algorithm for hierarchical learning. Our new algorithm, TreeMAML, achieved superior performance compared to similar meta-learning algorithms on NLP tasks by exploiting prior knowledge of the language tree.",
+      "highlights": ["Representation Learning", "Meta-Learning", "Computer Vision", "Natural Language Processing"]
+    },
+    {
+      "name": "MediaTek Research",
+      "position": "Research Intern",
+      "url": "https://example.com",
+      "startDate": "2020-06-01",
+      "endDate": "2020-10-01",
+      "summary": "During this time, I worked on a Meta-Learning project based on an adaptation of the MAML algorithm for hierarchical learning. Our new algorithm, TreeMAML, achieved superior performance compared to similar meta-learning algorithms on NLP tasks by exploiting prior knowledge of the language tree.",
       "highlights": ["Representation Learning", "Meta-Learning", "Computer Vision", "Natural Language Processing"]
     }
   ],
-  "volunteer": [
+  "projects": [
     {
       "name": "The Alan Turing Institute",
-      "position": "Data Study Group Participant",
       "url": "https://example.com",
       "startDate": "2021-04-01",
       "endDate": "2021-05-01",
-      "summary": "",
+      "summary": "Intensive hackathon working with ML techniques to produce a podcast recommendation algorithm for a company named Entale.",
       "highlights": ["Algorithmic Design", "Recommender Systems", "Machine Learning"]
     },
+    {
+      "name": "UK Atomic Energy Authority (UKAEA)",
+      "url": "https://example.com",
+      "startDate": "2019-01-01",
+      "endDate": "2019-05-01",
+      "summary": "Proof of concept project to show that the calibration of images from 'shaky' cameras inside a fusion reactor could be automated using off-the-shelf CNN models.",
+      "highlights": ["Computer Vision", "Nuclear Fusion", "Machine Learning"]
+    },
+    {
+      "name": "Unification of the Standard Model",
+      "url": "https://example.com",
+      "startDate": "2017-10-01",
+      "endDate": "2018-05-01",
+      "summary": "Explored various \textbf{unification group} candidates including $SU(5)$, $SO(10)$ and $E_{6}$ with and without supersymmetry.",
+      "highlights": ["Quantum Field Theory", "Theoretical Physics", "Group Theory", "Mathematics"]
+    }
+  ],
+  "volunteer": [
     {
       "name": "University of Leeds",
       "position": "Student Ambassador",
@@ -99,6 +130,20 @@
       "title": "High Energy Physics PhD Thesis Prize",
       "date": "2023-12-01",
       "awarder": "University College London",
+      "url": "",
+      "summary": ""
+    },
+    {
+      "title": "Research & Leadership Scholarship",
+      "date": "2018-06-01",
+      "awarder": "University of Leeds",
+      "url": "",
+      "summary": ""
+    },
+    {
+      "title": "Deans Excellence Scholarship",
+      "date": "2023-12-01",
+      "awarder": "University of Leeds",
       "url": "",
       "summary": ""
     }
@@ -221,16 +266,6 @@
       "name": "Professor John Doe",
       "icon": "fa-solid fa-thumbtack",
       "reference": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit. D"
-    }
-  ],
-  "projects": [
-    {
-      "name": "Quantum Computing",
-      "summary": "Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.",
-      "highlights": ["Quantum Teleportation", "Quantum Cryptography"],
-      "startDate": "2018-01-01",
-      "endDate": "2018-01-01",
-      "url": "https://example.com"
     }
   ]
 }
