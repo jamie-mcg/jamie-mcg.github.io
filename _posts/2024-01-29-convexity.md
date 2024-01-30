@@ -1,3 +1,13 @@
+---
+layout: post
+title: a post with math
+date: 2024-01-29 11:12:00-0400
+description: A short and easy to follow primer on convexity.
+tags: formatting math
+categories: mathematics
+related_posts: false
+---
+
 ## Introduction
 
 ## What is convexity?
