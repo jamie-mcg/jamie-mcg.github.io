@@ -123,7 +123,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: My Blog # blog_name will be displayed in your blog page
-blog_description: I like writing some thoughts down, not all of them (that wouldn't help anyone), but some! Let me know if you find any helpful (or if there are mistakes of course)!
+blog_description: Explanations, Thoughts and Ramblings... #I like writing some thoughts down, not all of them (that wouldn't help anyone), but some! Let me know if you find any helpful (or if there are mistakes of course)!
 permalink: /blog/:year/:title/
 
 # Pagination
