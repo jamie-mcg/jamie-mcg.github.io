@@ -2,14 +2,13 @@
 layout: about
 title: about
 permalink: /
-subtitle: Research Scientist @ MediaTek Research
+subtitle: Research Scientist @ MediaTek Research (London, UK)
 
 profile:
   align: right
   image: profile_pic.jpeg
   image_circular: true # crops the image to make it circular
-  more_info: >
-    <p>London, UK</p>
+  more_info:
 
 news: true # includes a list of news items
 latest_posts: true # includes a list of the newest posts
