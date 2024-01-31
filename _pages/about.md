@@ -6,7 +6,7 @@ subtitle: Research Scientist @ MediaTek Research
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: profile_pic.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>London, UK</p>
