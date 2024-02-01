@@ -3,7 +3,7 @@ layout: page
 title: Real-time Image Calibration inside Fusion Reactors
 description: A computer vision project with UKAEA
 img: assets/img/jet.jpg
-importance: 1
+importance: 2
 category: work
 related_publications: true
 ---
