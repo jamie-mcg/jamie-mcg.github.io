@@ -1,10 +1,10 @@
 ---
 layout: page
-title: project 1
-description: a project with a background image
-img: assets/img/12.jpg
+title: Recommending the Rabbit Hole
+description: Podcast recommendation system for Entale.
+img: assets/img/topicmodelrecs.jpeg
 importance: 1
-category: work
+category: fun
 related_publications: true
 ---
 
