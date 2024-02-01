@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Recommending the Rabbit Hole
+title: Recommend the Rabbit Hole
 description: Podcast recommendation system for Entale.
 img: assets/img/topicmodelrecs.jpeg
 importance: 1
