@@ -282,8 +282,8 @@ display_categories: ["blockquotes"] # these categories will be displayed on the 
 # -----------------------------------------------------------------------------
 
 scholar:
-  last_name: [Einstein]
-  first_name: [Albert, A.]
+  last_name: [McGowan]
+  first_name: [Jamie]
 
   style: apa
   locale: en
@@ -455,11 +455,11 @@ jsonresume:
   - basics
   - work
   - education
-  - publications
+  # - publications
   - projects
   - volunteer
   - awards
-  - certificates
+  # - certificates
   - skills
-  - interests
-  - references
+  # - interests
+  # - references

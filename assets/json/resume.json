@@ -217,9 +217,42 @@
   ],
   "skills": [
     {
+      "name": "Machine Learning",
+      "icon": "fa-solid fa-tag",
+      "keywords": [
+        "PyTorch",
+        "Tensorflow",
+        "Numpy",
+        "Scikit-Learn",
+        "Pandas",
+        "Tensorboard"
+      ]
+    },
+    {
+      "name": "Programming",
+      "icon": "fa-solid fa-tag",
+      "keywords": [
+        "Python",
+        "FORTRAN",
+        "Git",
+        "C++",
+        "LaTeX",
+        "Bash",
+        "Swift",
+        "HTML"
+      ]
+    },
+    {
+      "name": "Mathematics",
+      "icon": "fa-solid fa-tag",
+      "keywords": [
+        "Linear Algebra",
+        ""
+      ]
+    },
+    {
       "name": "Physics",
-      "level": "Master",
-      "icon": "fa-solid fa-hashtag",
+      "icon": "fa-solid fa-tag",
       "keywords": [
         "Quantum Mechanics",
         "Quantum Computing",
@@ -243,6 +276,30 @@
     }
   ],
   "interests": [
+    {
+      "name": "Machine Learning",
+      "icon": "fa-solid fa-tag",
+      "keywords": [
+        "Quantum Mechanics",
+        "Quantum Computing",
+        "Quantum Information",
+        "Quantum Cryptography",
+        "Quantum Communication",
+        "Quantum Teleportation"
+      ]
+    },
+    {
+      "name": "Physics",
+      "icon": "fa-solid fa-tag",
+      "keywords": [
+        "Quantum Mechanics",
+        "Quantum Computing",
+        "Quantum Information",
+        "Quantum Cryptography",
+        "Quantum Communication",
+        "Quantum Teleportation"
+      ]
+    },
     {
       "name": "Physics",
       "icon": "fa-solid fa-tag",
