@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Research Scientist @ MediaTek Research (London, UK)
+subtitle: Research Scientist @ MediaTek Research, London, UK
 
 profile:
   align: right
