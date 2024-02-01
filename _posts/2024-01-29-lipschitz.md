@@ -1,3 +1,13 @@
+---
+layout: post
+title: What the Lipschitz?!
+date: 2024-01-29 11:12:00-0400
+description: A short and easy to follow primer on convexity.
+tags: math optimisation
+categories: mathematics
+related_posts: false
+---
+
 ## Introduction
 
 Lipschitzness of a function is essential for ensuring the convergence properties of many gradient descent algorithms

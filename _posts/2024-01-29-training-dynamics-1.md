@@ -1,3 +1,13 @@
+---
+layout: post
+title: A Detailed Introduction to Training Dynamics of Neural Networks
+date: 2024-01-29 11:12:00-0400
+description: A short and easy to follow primer on convexity.
+tags: math optimisation
+categories: mathematics
+related_posts: false
+---
+
 ## Introduction
 
 
