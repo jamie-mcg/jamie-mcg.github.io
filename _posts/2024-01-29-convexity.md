@@ -6,6 +6,7 @@ description: A short and easy to follow primer on convexity.
 tags: math optimisation
 categories: mathematics
 related_posts: false
+featured: true
 ---
 
 ## Introduction
