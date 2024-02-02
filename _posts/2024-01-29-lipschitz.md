@@ -67,3 +67,15 @@ The above example defines a situation where we have local Lipschitzness but not 
 For global Lipschitzness, we require the function to have a Lipschitz constant which does not depend on the subset $$\Omega$$, i.e. $$L_{\Omega} = L$$.
 
 I hope this post has been a useful primer into the property of Lipschitzness. As always, feel free to reach out with any comments/questions!
+
+
+
+<!-- Local Lipschitz continuity means that a function is Lipschitz continuous on every compact subset of its domain. Let's discuss the local Lipschitzness of the functions we plotted:
+
+Linear Function: It is globally Lipschitz continuous, so it is also locally Lipschitz continuous everywhere.
+
+Sine Function: The sine function is globally Lipschitz continuous with a Lipschitz constant L = 1 (since its derivative is bounded by 1 in absolute value), so it is also locally Lipschitz continuous everywhere.
+
+Cusp Function: The cusp function (f(x) = |x|) is not globally Lipschitz continuous because the derivative is not bounded near the cusp (x = 0). However, it is locally Lipschitz continuous away from the cusp. For any compact subset that does not include the origin, we can find a Lipschitz constant.
+
+Quadratic Function: The quadratic function (f(x) = x^2) is not globally Lipschitz continuous because its derivative grows without bound as x increases. However, it is locally Lipschitz continuous on any compact subset of its domain because within any bounded interval, the derivative of the function is bounded, and thus a Lipschitz constant exists. -->
