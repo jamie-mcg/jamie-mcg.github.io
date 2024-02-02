@@ -56,9 +56,10 @@ Now, if you're screaming "Stop showing me maths!!", you're in luck, because I've
     </div>
 </div>
 <div class="caption">
-    Plots showing linear, cosine, cusp and quadratic functions to showcase Lipschitzness.
+    Plots showing linear, cosine, cusp and quadratic functions to showcase Lipschitzness. Image created by author.
 </div>
 
+So, remembering our rule from above, we can see that the linear and cosine functions both satisfy the Lipschitz inquality as there is some bound on the slopes they exhibit for all $$x \in \chi$$. On the other hand, the cusp function is not Lipschitz continuous at the origin because it has a discontinuity. Finally, the quadratic function is defined as Lipschitz continuous if and only if we are considering a bounded interval, because as $$x \rightarrow \infty$$, the slope becomes arbitrarily large.
 
 ## Globally & Locally Lipschitz
 
@@ -78,16 +79,6 @@ The above example defines a situation where we have local Lipschitzness but not 
 
 For global Lipschitzness, we require the function to have a Lipschitz constant which does not depend on the subset $$\Omega$$, i.e. $$L_{\Omega} = L$$.
 
+Now, just looking back at our plot from earlier, we can observe that the linear and cosine functions are most definitely locally Lipschitz because they are globally Lipschitz continuous. But although the cusp and quadratic functions were not globally Lipschitz, they can indeed be locally Lipschitz. For example, the problem with the cusp function was just the point at the origin. So if we just ignore this point (define our compact subspace accordingly), we can find a Lipschitz constant. Then, for our quadratic function, we said that it needed to be a bounded interval before we could call it Lipschitz continuous. But the definition of local Lipschitzness is that the "local" is on a compact subspace which, you guessed it, is bounded! Thus a Lipschitz constant exists for any compact subset on the quadratics domain.
+
 I hope this post has been a useful primer into the property of Lipschitzness. As always, feel free to reach out with any comments/questions!
-
-
-
-<!-- Local Lipschitz continuity means that a function is Lipschitz continuous on every compact subset of its domain. Let's discuss the local Lipschitzness of the functions we plotted:
-
-Linear Function: It is globally Lipschitz continuous, so it is also locally Lipschitz continuous everywhere.
-
-Sine Function: The sine function is globally Lipschitz continuous with a Lipschitz constant L = 1 (since its derivative is bounded by 1 in absolute value), so it is also locally Lipschitz continuous everywhere.
-
-Cusp Function: The cusp function (f(x) = |x|) is not globally Lipschitz continuous because the derivative is not bounded near the cusp (x = 0). However, it is locally Lipschitz continuous away from the cusp. For any compact subset that does not include the origin, we can find a Lipschitz constant.
-
-Quadratic Function: The quadratic function (f(x) = x^2) is not globally Lipschitz continuous because its derivative grows without bound as x increases. However, it is locally Lipschitz continuous on any compact subset of its domain because within any bounded interval, the derivative of the function is bounded, and thus a Lipschitz constant exists. -->
