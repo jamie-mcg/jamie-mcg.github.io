@@ -48,7 +48,7 @@ $$
 
 where $$L = 1$$. So we say that cosine is a $$1$$-Lipschitz function.
 
-Now, if you're screaming "Stop showing me maths!!", you're in luck, because I've created some nice plots for us to look at
+Now, if you're screaming "Stop showing me maths!!", you're in luck, because I've created some nice plots for us to look at...
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
@@ -56,8 +56,9 @@ Now, if you're screaming "Stop showing me maths!!", you're in luck, because I've
     </div>
 </div>
 <div class="caption">
-    A simple, elegant caption looks good between image rows, after each row, or doesn't have to be there at all.
+    Plots showing linear, cosine, cusp and quadratic functions to showcase Lipschitzness.
 </div>
+
 
 ## Globally & Locally Lipschitz
 
