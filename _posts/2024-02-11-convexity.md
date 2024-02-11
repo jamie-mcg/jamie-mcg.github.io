@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Convexity Explained
-date: 2024-01-29 11:12:00-0400
+date: 2024-02-11 11:12:00-0400
 description: A short and easy to follow primer on convexity.
 tags: math optimisation
 categories: mathematics

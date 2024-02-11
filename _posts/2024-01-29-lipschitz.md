@@ -2,10 +2,11 @@
 layout: post
 title: What the Lipschitz?!
 date: 2024-01-29 11:12:00-0400
-description: A short and easy to follow primer on convexity.
-tags: math optimisation
+description: All the math and intuition you need to know for a happy life.
+tags: math
 categories: mathematics
 related_posts: false
+featured: true
 ---
 
 ## Introduction
