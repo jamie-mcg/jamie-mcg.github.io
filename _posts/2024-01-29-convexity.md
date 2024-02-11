@@ -26,7 +26,29 @@ Indeed, a convex function $$f(x)$$ can be reflected into a concave function $$-f
 
 Mathematically, convexity is best described by Jensen's inequality,
 
-EQUATION
+$$
+f(E[X]) \le E[f(X)]
+$$
+for a convex function $f$ and a random vector $X$ that is within the span of $f$ - or however you say this. Now, I find it hard to conceptualise inequalities at face value, so let's chat about it a bit...
+
+Jensen's inequality essentially states that the expected value of a convex transformation of a random variable (i.e. $E[f(X)]$) is more than or equal to the value of the convex function evaluated at the mean od the random variable (i.e. $f(E[X])$) - or the gap between these two is never negative.
+
+OK, I'll be honest, when I wrote that, it only half made sense to me... I'm a physicist by background and so I love drawings and building intuitions visually, so let's do that!
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/blogs/convexity/jensens_inequality.gif" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    A visual representation of Jensen's inequality. Figure created by author.
+</div>
+
+
+Consider the figure above, here it is a lot easier to see
+
+
+
 
 JENSEN CHAT
 
