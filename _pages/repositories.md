@@ -2,7 +2,7 @@
 layout: page
 permalink: /repositories/
 title: repositories
-description: Below are some personal fun projects I've collected over the years!
+description: Below are some personal projects I've collected over the years!
 nav: true
 nav_order: 4
 ---
