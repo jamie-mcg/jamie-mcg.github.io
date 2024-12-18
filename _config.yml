@@ -219,7 +219,6 @@ exclude:
   - purgecss.config.js
   - README.md
   - vendor
-  - teaching.md
 keep_files:
   - CNAME
   - .nojekyll
