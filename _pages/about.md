@@ -16,7 +16,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-I am a Research Scientist at MediaTek Research. My research is focussed on the training dynamics of neural networks and the interpretibility of their predictions. My (vague and ambitious) research aim is to develop a deeper knowledge of how and why deep neural networks learn in specific ways and use this understanding to inform the next generation of AI.
+I am a Research Scientist at MediaTek Research. My research is focussed on the training dynamics of neural networks and the interpretibility of their predictions. My (vague and ambitious) research aim is to develop a deeper knowledge of how and why deep neural networks learn in specific ways and use this understanding to inform the next generation of AI. In particular, I'm interested in using this knowledge to design simpler algorithms and architectures, especially when applied to multimodality.
 
 Some very broad questions I have been thinking about recently include:
 
