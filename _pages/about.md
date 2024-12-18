@@ -21,9 +21,9 @@ I am a Research Scientist at MediaTek Research. My research is focussed on the t
 Some very broad questions I have been thinking about recently include:
 
 - How can neural networks become plastic?
-  - This is related to brain plasticity and recent efforts in structural learning.
+  - Plasticity is related to how well a neural network can adapt to new domains and/or modalities.
 - How can task dependent behaviours be extracted in deep networks?
-  - Follow up question: How can they be inserted?
+  - Or how can they be inserted?
 - What is next after Adam?
   - Or are we going to be using it forever and ever...
 
