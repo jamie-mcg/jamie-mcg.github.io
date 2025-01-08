@@ -4,6 +4,7 @@ import imageio
 from skimage import data
 from numpy.fft import fft2, fftshift
 import os
+import seaborn as sns
 
 from pysteps.utils import spectral
 
@@ -23,16 +24,6 @@ def diffusion_process(data, steps=10, noise_scale=100):
         datas.append(noisy_image)
     return datas
 
-
-# Load a sample image
-image = data.astronaut() / 255.0
-
-# Convert to grayscale
-image = np.mean(image, axis=2)
-
-# Generate diffusion process images
-diffusion_images = diffusion_process(image, steps=20)
-
 # FIGURE 2: Reverse diffusion process
 def reverse_diffusion_process(data, steps=10, noise_scale=100):
     datas = []
@@ -43,8 +34,17 @@ def reverse_diffusion_process(data, steps=10, noise_scale=100):
     return datas
 
 
+# Load a sample image
+image = data.astronaut() / 255.0
+
+# Convert to grayscale
+image = np.mean(image, axis=2)
+
+# Generate diffusion process images
+diffusion_images = diffusion_process(image, steps=20, noise_scale=10)
+
 # Generate reverse diffusion process images
-reverse_diffusion_images = reverse_diffusion_process(image, steps=20)
+reverse_diffusion_images = diffusion_images[::-1]
 
 diffusion_images.extend(reverse_diffusion_images)
 
@@ -176,15 +176,25 @@ def generate_complex_distribution(n_samples=1000):
     data = np.vstack((data1, data2))
     return data
 
-
-def create_gif(trajectories, title, filename):
+def create_joint_plot_gif(trajectories, title, filename):
     images = []
     for i, data in enumerate(trajectories):
-        plt.figure(figsize=(5, 5))
-        plt.scatter(data[:, 0], data[:, 1], alpha=0.5, s=10)
-        plt.title(f"{title} - Step {i}")
-        plt.axis("equal")
-        plt.axis("off")
+        fig, axs=plt.subplots(2,2,figsize=(8,6), gridspec_kw={'hspace': 0, 
+                                                        'wspace': 0,
+                                                        'width_ratios': [5, 1],
+                                                        'height_ratios': [1, 5]})
+        # Upper part charts
+        sns.distplot(data[:, 0], bins=20, ax=axs[0,0], color="LightBlue")
+
+        axs[0,0].axis("off")
+        axs[0,1].axis("off")
+        axs[1,1].axis("off")
+
+        # Right part charts
+        sns.distplot(data[:, 1], bins=20, ax=axs[1,1], color="LightBlue", vertical=True)
+
+        # KDE middle part
+        sns.kdeplot(x=data[:, 0], y=data[:, 1], fill=True, thresh=0.05, cmap="Blues", ax=axs[1,0])
 
         # Save the current plot as an image
         plt.savefig(f"temp_{i}.png")
@@ -194,24 +204,23 @@ def create_gif(trajectories, title, filename):
         images.append(imageio.imread(f"temp_{i}.png"))
 
     # Create a GIF from the images
-    imageio.mimsave(filename, images, duration=0.5)
+    imageio.mimsave(filename, images, duration=1.0)
 
     # Remove temporary images
     for i in range(len(trajectories)):
         os.remove(f"temp_{i}.png")
 
-
 # Generate complex distribution data
 complex_data = generate_complex_distribution()
 
 # Forward diffusion process
-forward_trajectories = diffusion_process(complex_data, steps=10)
+forward_trajectories = diffusion_process(complex_data, steps=20, noise_scale=200)
 
 # Combine forward and reverse trajectories
 combined_trajectories = forward_trajectories + forward_trajectories[::-1][1:]
 
 # Create and save the GIF
-create_gif(
+create_joint_plot_gif(
     combined_trajectories,
     "Diffusion Process",
     "../img/blogs/diffusion/diffusion_process_probability.gif",
