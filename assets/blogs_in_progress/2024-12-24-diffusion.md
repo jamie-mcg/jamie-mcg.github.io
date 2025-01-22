@@ -69,6 +69,15 @@ where the last line is a commonly used shorthand for the concatenation of variab
 
 OK, so the math checks out that as long as we obey the time ordering i.e. $x^{(T)}$ being the worst, $x^{(0)}$ being the best and $t=T-1,\dots 1$ being progressively better versions of $x$.
 
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/blogs/diffusion/diffusion_process.gif" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Figure created by author with astronaut image from `skimage`.
+</div>
+
 ## Creating $x^{(t)}$
 
 The first problem we have is that $x^{(0)} \sim q(x^{(0)})$ is a perfect data sample, so how do we go about getting our hands on $x^{(t)} \forall t \in \{1, \dots, T\}$.
