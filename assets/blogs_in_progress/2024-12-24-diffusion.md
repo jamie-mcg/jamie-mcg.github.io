@@ -256,8 +256,31 @@ $$
 In the $x^{(0)}$-parameterisation, we do exactly what it says on the tin and parameterise $x^{(0)}$:
 
 $$
-\mu_{t-1|0,t}^{\theta} = a^{(t)}x^{(0)}_{\theta} + b^{(t)}x^{(t)}
+\mu_{t-1|0,t}^{\theta} = a^{(t)}x^{(0)}_{\theta}(x^{(t)}) + b^{(t)}x^{(t)}
 $$
 
 ### ii. $\epsilon$-parameterisation
+
+An alternative parameterisation to the above is found by instead aiming to predict the noise $\epsilon$ at each step. Similarly to the $x^{(0)}$-parameterisation, our weight sharing is well-founded by the argument that each step is adding a similar amount of noise - so we can imagine some redundancy in the parameters across adjacent steps.
+
+If we cast our minds back to earlier, we had a noising schedule which can be written as:
+
+$$
+x^{(t)} = \prod_{t^\prime = 1}^{t} \lambda_{t^\prime} x^{(0)} + \sqrt{1-\prod_{t^\prime = 1}^{t}\lambda_{t^\prime}^{2}}\ \epsilon^{(t)} \qquad \epsilon^{(t)} \sim \mathcal{N}(0,1) \\
+x^{(t)} = c^{(t)} x^{(0)} + d^{(t)} \epsilon^{(t)}
+$$
+
+So if we take the conditional mean that we got from our $x^{(0)}$-parameterisation, we can easily substitue the above into this and write down a new expression of the form:
+
+$$
+\mu_{t-1|0,t}^{\theta} = \left(\frac{a^{(t)}}{c^{(t)}} + b^{(t)}\right)x^{(t)} - \frac{a^{(t)}d^{(t)}}{c^{(t)}}\epsilon^{(t)}_{\theta}(x^{(t)})
+$$
+
+So given the input and the timestep, our parameterisation now predicts the noise that needs to be taken away from $x^{(t)}$ in order to give $x^{(t-1)}$.
+
+OK, so hopefully its pretty easy to see how these two parameterisations are related to each other. In fact, you might be asking, _"what is the difference?"_ or _"why would we want to do this?"_ - these would be valid questions!
+
+To answer these a bit more in depth, we can consider how each one is actually performing the denoising step and at the same time, learn about some related work!
+
+## Denoising Autoencoders
 
