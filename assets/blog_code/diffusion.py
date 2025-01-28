@@ -24,6 +24,7 @@ def diffusion_process(data, steps=10, noise_scale=100):
         datas.append(noisy_image)
     return datas
 
+
 # FIGURE 2: Reverse diffusion process
 def reverse_diffusion_process(data, steps=10, noise_scale=100):
     datas = []
@@ -66,6 +67,7 @@ def compute_power_spectrum(image):
     power_spectrum = np.abs(f_transform_shifted) ** 2
     return power_spectrum
 
+
 def create_gif(trajectories, title, filename):
     images = []
     for i, data in enumerate(trajectories):
@@ -89,6 +91,7 @@ def create_gif(trajectories, title, filename):
     for i in range(len(trajectories)):
         os.remove(f"temp_{i}.png")
 
+
 def plot_power_spectrum(image, steps=10, noise_scale=200):
     images = []
 
@@ -99,9 +102,11 @@ def plot_power_spectrum(image, steps=10, noise_scale=200):
         plt.subplot(1, 2, 1)
         power_spectrum = compute_power_spectrum(img)
         rapsd, frequencies = spectral.rapsd(img, fft_method=np.fft, return_freq=True)
-        plt.plot(frequencies[1:], rapsd[1:], c='red', marker='o', markersize=3)  # Chop off the DC component.
-        plt.xscale('log')
-        plt.yscale('log')
+        plt.plot(
+            frequencies[1:], rapsd[1:], c="red", marker="o", markersize=3
+        )  # Chop off the DC component.
+        plt.xscale("log")
+        plt.yscale("log")
         plt.ylim(0.0003, 1000)
         plt.title(f"Step {i}")
 
@@ -127,9 +132,11 @@ def plot_power_spectrum(image, steps=10, noise_scale=200):
         plt.subplot(1, 2, 1)
         power_spectrum = compute_power_spectrum(img)
         rapsd, frequencies = spectral.rapsd(img, fft_method=np.fft, return_freq=True)
-        plt.plot(frequencies[1:], rapsd[1:], c='red', marker='o', markersize=3)  # Chop off the DC component.
-        plt.xscale('log')
-        plt.yscale('log')
+        plt.plot(
+            frequencies[1:], rapsd[1:], c="red", marker="o", markersize=3
+        )  # Chop off the DC component.
+        plt.xscale("log")
+        plt.yscale("log")
         plt.ylim(0.0003, 1000)
         plt.title(f"Step {steps - i}")
 
@@ -149,7 +156,9 @@ def plot_power_spectrum(image, steps=10, noise_scale=200):
         os.remove(f"temp_{i}.png")
 
     # Create a GIF from the images
-    imageio.mimsave("../img/blogs/diffusion/power_spectrum_diffusion.gif", images, duration=1.0)
+    imageio.mimsave(
+        "../img/blogs/diffusion/power_spectrum_diffusion.gif", images, duration=1.0
+    )
 
 
 # Load a sample image
@@ -176,25 +185,42 @@ def generate_complex_distribution(n_samples=1000):
     data = np.vstack((data1, data2))
     return data
 
+
 def create_joint_plot_gif(trajectories, title, filename):
     images = []
     for i, data in enumerate(trajectories):
-        fig, axs=plt.subplots(2,2,figsize=(8,6), gridspec_kw={'hspace': 0, 
-                                                        'wspace': 0,
-                                                        'width_ratios': [5, 1],
-                                                        'height_ratios': [1, 5]})
+        fig, axs = plt.subplots(
+            2,
+            2,
+            figsize=(8, 6),
+            gridspec_kw={
+                "hspace": 0,
+                "wspace": 0,
+                "width_ratios": [5, 1],
+                "height_ratios": [1, 5],
+            },
+        )
         # Upper part charts
-        sns.distplot(data[:, 0], bins=20, ax=axs[0,0], color="LightBlue")
+        sns.distplot(data[:, 0], bins=20, ax=axs[0, 0], color="LightBlue")
 
-        axs[0,0].axis("off")
-        axs[0,1].axis("off")
-        axs[1,1].axis("off")
+        axs[0, 0].axis("off")
+        axs[0, 1].axis("off")
+        axs[1, 1].axis("off")
 
         # Right part charts
-        sns.distplot(data[:, 1], bins=20, ax=axs[1,1], color="LightBlue", vertical=True)
+        sns.distplot(
+            data[:, 1], bins=20, ax=axs[1, 1], color="LightBlue", vertical=True
+        )
 
         # KDE middle part
-        sns.kdeplot(x=data[:, 0], y=data[:, 1], fill=True, thresh=0.05, cmap="Blues", ax=axs[1,0])
+        sns.kdeplot(
+            x=data[:, 0],
+            y=data[:, 1],
+            fill=True,
+            thresh=0.05,
+            cmap="Blues",
+            ax=axs[1, 0],
+        )
 
         # Save the current plot as an image
         plt.savefig(f"temp_{i}.png")
@@ -209,6 +235,7 @@ def create_joint_plot_gif(trajectories, title, filename):
     # Remove temporary images
     for i in range(len(trajectories)):
         os.remove(f"temp_{i}.png")
+
 
 # Generate complex distribution data
 complex_data = generate_complex_distribution()
@@ -231,9 +258,10 @@ create_joint_plot_gif(
 
 # Image(filename="diffusion_process.gif")
 
+
 # FIGURE 5: Noise schedule comparison
-# def linear_schedule(step, total_steps):
-#     return step / total_steps
+def linear_schedule(step, total_steps):
+    return step / total_steps
 
 
 # def cosine_schedule(step, total_steps):
@@ -278,23 +306,23 @@ create_joint_plot_gif(
 
 
 # # FIGURE 6:
-# def plot_generated_samples(image_shape, steps=10):
-#     noise_schedule = linear_schedule
-#     reverse_images = reverse_diffusion(image_shape, steps, noise_schedule)
+def plot_generated_samples(image, steps=10):
+    noise_schedule = linear_schedule
+    reverse_images = reverse_diffusion_process(image, steps, 200)
 
-#     plt.figure(figsize=(15, 5))
+    plt.figure(figsize=(15, 5))
 
-#     for i, img in enumerate(reverse_images):
-#         plt.subplot(1, steps + 1, i + 1)
-#         plt.imshow(img, cmap="gray")
-#         plt.title(f"Step {i}")
-#         plt.axis("off")
+    for i, img in enumerate(reverse_images):
+        plt.subplot(1, steps + 1, i + 1)
+        plt.imshow(img, cmap="gray")
+        plt.title(f"Step {i}")
+        plt.axis("off")
 
-#     plt.suptitle("Generated Samples in Reverse Diffusion Process")
-#     plt.tight_layout()
-#     plt.savefig("generated_samples.png")
-#     plt.show()
+    plt.suptitle("Generated Samples in Reverse Diffusion Process")
+    plt.tight_layout()
+    plt.savefig("generated_samples.png")
+    plt.show()
 
 
-# # Plot and save the generated samples
-# plot_generated_samples(image.shape, steps=10)
+# Plot and save the generated samples
+plot_generated_samples(image, steps=10)
