@@ -67,7 +67,7 @@ Right, before we get confused, lets add to our math we had earlier, just so we c
 
 Let our data be $$x^{(0)}$$ and our starting point (blank page/random vector) be $$x^{(T)}$$. Apologies for the cryptic notation, I promise this notation will become clearer later...
 
-The problem we have set up is $$x^{(0)} \sim p(x^{(0)}|x^{(T)})$$ as an approximation to $$x \sim q(x)$$.
+The problem we have set up is $$x^{(0)} ~ p(x^{(0)}|x^{(T)})$$ as an approximation to $$x ~ q(x)$$.
 
 Hmm... this still seems super hard though, right? If I asked you to go from a blank page to a masterpiece in a single step, unless you were Picasso, you would quite clearly struggle. So let's break it up, step-by-step.
 
@@ -77,7 +77,7 @@ $$
 x^{(0)} \leftarrow x^{(1)} \leftarrow \dots \leftarrow x^{(t-1)} \leftarrow x^{(t)} \leftarrow \dots \leftarrow x^{(T-1)} \leftarrow x^{(T)}
 $$
 
-where now we can define a much simpler regression problem at each step, which can be modelled by $$x^{(t-1)} \sim p(x^{(t-1)}|x^{(t)})$$. With this, we can write the marginal distribution as:
+where now we can define a much simpler regression problem at each step, which can be modelled by $$x^{(t-1)} ~ p(x^{(t-1)}|x^{(t)})$$. With this, we can write the marginal distribution as:
 
 $$
 p(x^{(0)}) = \int p(x^{(T)}) p(x^{(0)}|x^{(1)}) \dots p(x^{(T-1)}|x^{(T)}) dx^{(1)} \dots dx^{(0)} \\
@@ -384,3 +384,14 @@ where $$\Lambda_t = \prod_{t^\prime=1}^{t}\lambda_{t^\prime}$$. Hopefully, you a
 
 OK, great! Thanks for reading this post, if you have made it this far! Although technical, I hope it has given you a bit more of an intuitive explanation behind some of the main mathematical concepts of diffusion models.
 
+
+# References
+
+There are loads of references that I could state here. These are a few which inspired this post and/or that I find useful!
+
+- J. Ho, et. al., _Denoising Diffusion Probabilistic Models_, (2020)
+- L. Weng, _What are Diffusion Models?_, (2021)
+- S. Dieleman, _Diffusion is Spectral Autoregression_, (2024)
+- R. Turner, _Denoising Diffusion Probabilistic
+Models in Six Simple Steps_, (2024)
+- I. Strümke, H. Langseth, _Lecture Notes in Probabilistic Diffusion Models_, (2023)
