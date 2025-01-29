@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Diffusion
+title: A Technical Introduction to Diffusion Models
 date: 2024-01-29 11:12:00-0400
 description: A comprehensive look at the theory and concepts underpinning diffusion models.
 tags: math diffusion
@@ -40,7 +40,7 @@ To be clear, this doesn't mean that we can imagine exactly a particular image of
 
 Now let's just round off this section by stating some mathematical definitions which will be useful later.
 
-Let $x \in RR^d$ be our data with dimension $d$ which is obtained from some underlying distribution $q_{\text{data}}(x)$. The goal of a generative model is to estimate $p(x)$ which approximates the true data distribution $q_{\text{data}}(x)$.
+Let $$x \in RR^d$$ be our data with dimension $d$ which is obtained from some underlying distribution $q_{\text{data}}(x)$. The goal of a generative model is to estimate $p(x)$ which approximates the true data distribution $q_{\text{data}}(x)$.
 
 Here is an example of a model fabricating some image out of thin air!
 
