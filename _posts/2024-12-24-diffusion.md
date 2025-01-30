@@ -130,6 +130,12 @@ Let's see an example of how these probabilities are related. Below is an example
 
 I just want to pause slightly here and discuss something I find super interesting, which is; _how this process looks in the frequency domain_.
 
+This is something that caught my eye at NeurIPS last year when I was attending a talk by Sander Dieleman (see his blog post for more inforamtion). Basically, in the frequency domain, we can think of noising as first washing out the higher frequency part of the image, before pregressively moving to dominate the lower frequency domain of the image spectra.
+
+To unpack this more quantitatively, we can analyse the spatial frequency components of the image. When we take a Fourier transform, we produce a radial spectra which typically involves the lowest frequencies concentrated at the centre and higher frequencies at the edges. From here we can take radial slices and compute the power spectrum for that particular angle. In order to get a more global picture, we can average all of these slices and obtain whats called a _Radially Averaged Power Spectral Density (RAPSD)_ - this is what we will play around with here. Essentially, the RASPD is a measure of the power spectrum for all spatial frequencies of an image.
+
+Below is an animation of how this RASPD changes during the noising process:
+
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid path="assets/img/blogs/diffusion/power_spectrum_diffusion.gif" class="img-fluid rounded z-depth-1" %}
@@ -139,6 +145,10 @@ I just want to pause slightly here and discuss something I find super interestin
     Figure created by author.
 </div>
 
+OK, so lets imagine that all these points in the RASPD are points in a sequence, in this space the denoising process (which acts in reverse to the noising process) can be viewed as an autoregressive problem, i.e. at each step, the denoising process needs to predict the next highest frequency in the sequence. Pretty cool I think!
+
+For reference, below is the snapshots of the RASPD during the noising process!
+
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid path="assets/img/blogs/diffusion/power_spectrum_diffusion.png" class="img-fluid rounded z-depth-1" %}
@@ -147,6 +157,8 @@ I just want to pause slightly here and discuss something I find super interestin
 <div class="caption">
     Figure created by author.
 </div>
+
+Anyway, enough of that, now back to the main article!
 
 ## How do we noise this thing?
 
