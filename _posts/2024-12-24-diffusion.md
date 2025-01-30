@@ -77,11 +77,11 @@ $$
 x^{(0)} \leftarrow x^{(1)} \leftarrow \dots \leftarrow x^{(t-1)} \leftarrow x^{(t)} \leftarrow \dots \leftarrow x^{(T-1)} \leftarrow x^{(T)}
 $$
 
-where now we can define a much simpler regression problem at each step, which can be modelled by $$x^{(t-1)} ~ p(x^{(t-1)}|x^{(t)})$$. With this, we can write the marginal distribution as:
+where now we can define a much simpler regression problem at each step, which can be modelled by $$x^{(t-1)} ~ p(x^{(t-1)}\vert x^{(t)})$$. With this, we can write the marginal distribution as:
 
 $$
-p(x^{(0)}) = \int p(x^{(T)}) p(x^{(0)}|x^{(1)}) \dots p(x^{(T-1)}|x^{(T)}) dx^{(1)} \dots dx^{(0)} \\
-= \int p(x^{(T)}) \prod_{t=1}^{T} p(x^{(t-1)}|x^{(t)}) dx^{(t)} \\
+p(x^{(0)}) = \int p(x^{(T)}) p(x^{(0)}\vert x^{(1)}) \dots p(x^{(T-1)}\vert x^{(T)}) dx^{(1)} \dots dx^{(0)} \\
+= \int p(x^{(T)}) \prod_{t=1}^{T} p(x^{(t-1)}\vert x^{(t)}) dx^{(t)} \\
 = \int p(x^{(0:T)}) dx^{(1:T)}
 $$
 
@@ -106,11 +106,11 @@ This is where "noising" comes in!
 
 The data creation process for our litter regression problems will involve noising our perfect data $$x^{(0)}$$ by a small amount over $$T$$ steps, until we reach $$x^{(T)}$$.
 
-We will denote the noising process as $$q(x^{(t)}|x^{(t-1)})$$ and define it as a first order Gaussian which performs the transformation:
+We will denote the noising process as $$q(x^{(t)}\vert x^{(t-1)})$$ and define it as a first order Gaussian which performs the transformation:
 
 $$
 x^{(t)} = \lambda_t x^{(t-1)} + \sigma_t \epsilon_t \qquad \epsilon \sim \mathcal{N}(0,1) \\
-q(x^{(t)}|x^{(t-1)}) = \mathcal{N}(x^{(t)}; \lambda_t x^{(t-1)}, \sigma_t^2)
+q(x^{(t)}\vert x^{(t-1)}) = \mathcal{N}(x^{(t)}; \lambda_t x^{(t-1)}, \sigma_t^2)
 $$
 
 Great! We now have our noising and denoising processing written down!
@@ -172,10 +172,10 @@ By recursion, we can see that this is true for all $$t$$.
 In this case, when the process is variance preserving, we can write down:
 
 $$
-q(x^{(t)}|x^{(0)}) = \mathcal{N}(x^{(t)}; \prod_{i=1}^{t} \lambda_{i} x^{(0)}, 1 - \prod_{i=1}^{t}\lambda_t^2)
+q(x^{(t)}\vert x^{(0)}) = \mathcal{N}(x^{(t)}; \prod_{i=1}^{t} \lambda_{i} x^{(0)}, 1 - \prod_{i=1}^{t}\lambda_t^2)
 $$
 
-which can be proved by unrolling $$q(x^{(t)}|x^{(t-1)})$$, if you fancy doing some rather laborious maths.
+which can be proved by unrolling $$q(x^{(t)}\vert x^{(t-1)})$$, if you fancy doing some rather laborious maths.
 
 OK, now we are getting somewhere. We have a problem setup, we have our chain of makeshift supervised regression problems and we know how to generate the noisey labels for each of these regression problems. Indeed, from the above, we can even generate any noisey sample at any point in this chain, directly from the input $$x^{(0)}$$, as long as we have a variance preserving process!
 
@@ -202,12 +202,12 @@ Taking a step back, we have a dataset that now consists of lots of ordered noise
 To play aroung a bit, lets simply define a loss which concatenates all of our small regression tasks, each with their own set of parameters $$\Theta = \{\theta_t\}_{t\in [0, T-1]}$$.
 
 $$
-\mathcal{L}(\Theta) = \mathbb{E}_q \log\left\{p(x^{(T)}) \prod_{t=1}^{T} p_{\theta_{t-1}}(x^{(t-1)}|x^{(t)}) \right\}
+\mathcal{L}(\Theta) = \mathbb{E}_q \log\left\{p(x^{(T)}) \prod_{t=1}^{T} p_{\theta_{t-1}}(x^{(t-1)}\vert x^{(t)}) \right\}
 \\
-=\mathbb{E}_q \left[\log p(x^{(T)})\right] + \sum_{t=1}^{T} \mathbb{E}_q \left[\log p_{\theta_{t-1}}(x^{(t-1)}|x^{(t)})\right]
+=\mathbb{E}_q \left[\log p(x^{(T)})\right] + \sum_{t=1}^{T} \mathbb{E}_q \left[\log p_{\theta_{t-1}}(x^{(t-1)}\vert x^{(t)})\right]
 $$
 
-where it is the second term which depends on the parameters, so an individual regression loss would be $$\mathcal{L}(\theta_{t-1}) = \mathbb{E}_q \left[\log p_{\theta_{t-1}}(x^{(t-1)}|x^{(t)})\right]$$.
+where it is the second term which depends on the parameters, so an individual regression loss would be $$\mathcal{L}(\theta_{t-1}) = \mathbb{E}_q \left[\log p_{\theta_{t-1}}(x^{(t-1)}\vert x^{(t)})\right]$$.
 
 OK cool, so as we are all excellent researchers and like to think about the implications of our maths before whacking it into some code... Let's just have a think about the complexity of the above formalism.
 
@@ -220,7 +220,7 @@ From now on, we will define one set of weights for all timesteps $$\theta_t \rig
 After all this, we can make a minimal adjustment to our individual loss function:
 
 $$
-\mathcal{L}_{t-1}(\theta) = \mathbb{E}_q \left[\log p_{\theta}(x^{(t-1)}|x^{(t)})\right].
+\mathcal{L}_{t-1}(\theta) = \mathbb{E}_q \left[\log p_{\theta}(x^{(t-1)}\vert x^{(t)})\right].
 $$
 
 Right, last thing for this section, how do we add some control to this training? Let me explain...
@@ -268,7 +268,7 @@ Now we come to the denoising part of our pipeline... Finally!
 In this part, the goal is to learn the noise which we want to remove at each step. However, because we have already defined the noising schedule with a Gaussian we can also parameterise the noise to remove similarly:
 
 $$
-p(x^{(t-1)}|x^{(t)}; t-1, \theta) = \mathcal{N}(x^{(t-1)};\mu_{\theta}(x^{(t)}; t-1), \sigma_{\theta}^{2}(x^{(t)}; t-1))
+p(x^{(t-1)}\vert x^{(t)}; t-1, \theta) = \mathcal{N}(x^{(t-1)};\mu_{\theta}(x^{(t)}; t-1), \sigma_{\theta}^{2}(x^{(t)}; t-1))
 $$
 
 This leaves us with two terms to deal with here; the mean and the variance.
@@ -277,24 +277,24 @@ For the mean, we can do this by either; (i) directly parameterising $$x^{(0)}$$ 
 
 ### i. $$x^{(0)}$$-parameterisation
 
-This method involves looking at the noising step $$q(x^{(t-1)}|x^{(0)}, x^{(t)})$$ where from Bayes rule, we have:
+This method involves looking at the noising step $$q(x^{(t-1)}\vert x^{(0)}, x^{(t)})$$ where from Bayes rule, we have:
 
 $$
-q(x^{(t-1)}|x^{(0)}, x^{(t)}) \propto q(x^{(t-1)}|x^{(0)})q(x^{(t)}|x^{(t-1)})  \\
+q(x^{(t-1)}\vert x^{(0)}, x^{(t)}) \propto q(x^{(t-1)}\vert x^{(0)})q(x^{(t)}\vert x^{(t-1)})  \\
 = \mathcal{N}\left( x^{(t-1)};\ \left(\prod_{t^\prime = 1}^{t-1} \lambda_{t^\prime} x^{(0)} \right),\ 1 - \prod_{t^\prime = 1}^{t-1} \lambda_{t^{\prime}}^{2} \right) \times \mathcal{N}(x^{(t)};\ \lambda_t x^{(t-1)}, \ 1-\lambda_t^2)
 $$
 
-then completing the square and doing some mathematical gymnastics gives us a new distribution $$q(x^{(t-1)}|x^{(0)}, x^{(t)}) = \mathcal{N}(x^{(t-1)}; \mu_{t-1|0,t}, \sigma_{t-1|0,t}^{2})$$ where:
+then completing the square and doing some mathematical gymnastics gives us a new distribution $$q(x^{(t-1)}\vert x^{(0)}, x^{(t)}) = \mathcal{N}(x^{(t-1)}; \mu_{t-1\vert 0,t}, \sigma_{t-1\vert 0,t}^{2})$$ where:
 
 $$
-\mu_{t-1|0,t} = \frac{\left(\prod_{t^\prime = 1}^{t-1} \lambda_{t^\prime}\right)(1-\lambda_t^2)}{1 - \prod_{t^\prime = 1}^{t} \lambda^2_{t^\prime}} x^{(0)} + \frac{\left(1 - \prod_{t^\prime = 1}^{t-1} \lambda^2_{t^\prime}\right)\lambda_t}{1 - \prod_{t^\prime = 1}^{t} \lambda^2_{t^\prime}}x^{(t)} \\
-\sigma_{t-1|0,t}^{2} = \frac{\left(1 - \prod_{t^\prime = 1}^{t-1} \lambda^2_{t^\prime}\right)(1 - \lambda_t^2)}{1 - \prod_{t^\prime = 1}^{t} \lambda^2_{t^\prime}}
+\mu_{t-1\vert 0,t} = \frac{\left(\prod_{t^\prime = 1}^{t-1} \lambda_{t^\prime}\right)(1-\lambda_t^2)}{1 - \prod_{t^\prime = 1}^{t} \lambda^2_{t^\prime}} x^{(0)} + \frac{\left(1 - \prod_{t^\prime = 1}^{t-1} \lambda^2_{t^\prime}\right)\lambda_t}{1 - \prod_{t^\prime = 1}^{t} \lambda^2_{t^\prime}}x^{(t)} \\
+\sigma_{t-1\vert 0,t}^{2} = \frac{\left(1 - \prod_{t^\prime = 1}^{t-1} \lambda^2_{t^\prime}\right)(1 - \lambda_t^2)}{1 - \prod_{t^\prime = 1}^{t} \lambda^2_{t^\prime}}
 $$
 
 In the $$x^{(0)}$$-parameterisation, we do exactly what it says on the tin and parameterise $$x^{(0)}$$:
 
 $$
-\mu_{t-1|0,t}^{\theta} = a^{(t)}x^{(0)}_{\theta}(x^{(t)}) + b^{(t)}x^{(t)}
+\mu_{t-1\vert 0,t}^{\theta} = a^{(t)}x^{(0)}_{\theta}(x^{(t)}) + b^{(t)}x^{(t)}
 $$
 
 ### ii. $$\epsilon$$-parameterisation
@@ -311,7 +311,7 @@ $$
 So if we take the conditional mean that we got from our $$x^{(0)}$$-parameterisation, we can easily substitue the above into this and write down a new expression of the form:
 
 $$
-\mu_{t-1|0,t}^{\theta} = \left(\frac{a^{(t)}}{c^{(t)}} + b^{(t)}\right)x^{(t)} - \frac{a^{(t)}d^{(t)}}{c^{(t)}}\epsilon^{(t)}_{\theta}(x^{(t)})
+\mu_{t-1\vert 0,t}^{\theta} = \left(\frac{a^{(t)}}{c^{(t)}} + b^{(t)}\right)x^{(t)} - \frac{a^{(t)}d^{(t)}}{c^{(t)}}\epsilon^{(t)}_{\theta}(x^{(t)})
 $$
 
 So given the input and the timestep, our parameterisation now predicts the noise that needs to be taken away from $$x^{(t)}$$ in order to give $$x^{(t-1)}$$.
@@ -352,7 +352,7 @@ Seeing it this way, we can see the resemblance of the denoising autoencoder to t
 
 Denoising score matching (DSM) is a technique used to estimate a score function. The score function is defined as _the gradient of the log probability density function of the data_. OK, slow down, what does that mean?
 
-Well, remember that $$q(x^{(t-1)}|x^{(0)}, x^{(t)})$$ is our noising process. The score is the change in this noising process across the noising schedule, which changes with $$x$$. In the context of diffusion models, DSM is therefore closely related to the $$\epsilon$$-parameterisation, which essentially parameterises the change between steps in the noising process.
+Well, remember that $$q(x^{(t-1)}\vert x^{(0)}, x^{(t)})$$ is our noising process. The score is the change in this noising process across the noising schedule, which changes with $$x$$. In the context of diffusion models, DSM is therefore closely related to the $$\epsilon$$-parameterisation, which essentially parameterises the change between steps in the noising process.
 
 In the $$\epsilon$$-parameterisation, the objective is to predict the noise added to the clean data $$x^{(0)}$$ to obtain the noisy data $$x^{(t)}$$. A neural network $$g_\theta$$ is trained to map the noisy input $$x^{(t)}$$ to the noise $$\epsilon:
 
