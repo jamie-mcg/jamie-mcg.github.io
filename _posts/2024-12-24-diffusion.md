@@ -67,7 +67,7 @@ Right, before we get confused, lets add to our math we had earlier, just so we c
 
 Let our data be $$x^{(0)}$$ and our starting point (blank page/random vector) be $$x^{(T)}$$. Apologies for the cryptic notation, I promise this notation will become clearer later...
 
-The problem we have set up is $$x^{(0)} \sim p(x^{(0)} \vert x^{(T)})$$ as an approximation to $$x ~ q(x)$$.
+The problem we have set up is $$x^{(0)} \sim p(x^{(0)} \vert x^{(T)})$$ as an approximation to $$x \sim q(x)$$.
 
 Hmm... this still seems super hard though, right? If I asked you to go from a blank page to a masterpiece in a single step, unless you were Picasso, you would quite clearly struggle. So let's break it up, step-by-step.
 
@@ -77,7 +77,7 @@ $$
 x^{(0)} \leftarrow x^{(1)} \leftarrow \dots \leftarrow x^{(t-1)} \leftarrow x^{(t)} \leftarrow \dots \leftarrow x^{(T-1)} \leftarrow x^{(T)}
 $$
 
-where now we can define a much simpler regression problem at each step, which can be modelled by $$x^{(t-1)} ~ p(x^{(t-1)}\vert x^{(t)})$$. With this, we can write the marginal distribution as:
+where now we can define a much simpler regression problem at each step, which can be modelled by $$x^{(t-1)} \sim p(x^{(t-1)}\vert x^{(t)})$$. With this, we can write the marginal distribution as:
 
 $$
 p(x^{(0)}) = \int p(x^{(T)}) p(x^{(0)}\vert x^{(1)}) \dots p(x^{(T-1)}\vert x^{(T)}) dx^{(1)} \dots dx^{(0)} \\
@@ -100,7 +100,7 @@ OK, so the math checks out that as long as we obey the time ordering i.e. $$x^{(
 
 ## Creating $$x^{(t)}$$
 
-The first problem we have is that $$x^{(0)} \sim q(x^{(0)})$$ is a perfect data sample, so how do we go about getting our hands on $$x^{(t)} \forall t \in \{1, \dots, T\}$$.
+The first problem we have is that $$x^{(0)} \sim q(x^{(0)})$$ is a perfect data sample, so how do we go about getting our hands on $$x^{(t)}\ \forall t \in \{1, \dots, T\}$$.
 
 This is where "noising" comes in!
 
@@ -109,8 +109,8 @@ The data creation process for our litter regression problems will involve noisin
 We will denote the noising process as $$q(x^{(t)}\vert x^{(t-1)})$$ and define it as a first order Gaussian which performs the transformation:
 
 $$
-x^{(t)} = \lambda_t x^{(t-1)} + \sigma_t \epsilon_t \qquad \epsilon \sim \mathcal{N}(0,1) \\
-q(x^{(t)}\vert x^{(t-1)}) = \mathcal{N}(x^{(t)}; \lambda_t x^{(t-1)}, \sigma_t^2)
+x^{(t)} = \sqrt{1-\beta_t} x^{(t-1)} + \sigma_t \epsilon_t \qquad \epsilon \sim \mathcal{N}(0,1) \\
+q(x^{(t)}\vert x^{(t-1)}) = \mathcal{N}(x^{(t)}; \sqrt{1-\beta_t} x^{(t-1)}, \sigma_t^2)
 $$
 
 Great! We now have our noising and denoising processing written down!
@@ -126,28 +126,49 @@ Let's see an example of how these probabilities are related. Below is an example
     Figure created by author.
 </div>
 
+### Aside: The View from a Frequency Perspective
+
+I just want to pause slightly here and discuss something I find super interesting, which is; _how this process looks in the frequency domain_.
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/blogs/diffusion/power_spectrum_diffusion.gif" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Figure created by author.
+</div>
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/blogs/diffusion/power_spectrum_diffusion.png" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Figure created by author.
+</div>
 
 ## How do we noise this thing?
 
-In order to actually use this noising process, we need to first define $$\lambda_t$$ and $$\sigma_t$$. If we stop and think about what these parameters actually mean for a second, we might be able to gain some insight.
+In order to actually use this noising process, we need to first define $$\sqrt{\alpha_t} = \sqrt{1-\beta_t}$$ and $$\sigma_t$$. If we stop and think about what these parameters actually mean for a second, we might be able to gain some insight.
 
 
-- $$\lambda_t \rightarrow 0$$ means that we forget all information and only have noise
-- $$\lambda_t = 1$$ means we retain the information in $$x^{(t-1)}$$
+- $$\sqrt{\alpha_t} \rightarrow 0$$ means that we forget all information and only have noise
+- $$\sqrt{\alpha_t} = 1$$ means we retain the information in $$x^{(t-1)}$$
 
 We want $$x^{(T)}$$ to contain zero information, since $$x^{(T)}$$ is our blank canvas which we want to easily sample from whatever we want to generate something new.
 
-In this sense, we would like $$\lambda_t < 1$$, but we want to keep small regression tasks as simple as possible - not lose too much information at each step. So we might want to have $$\lambda_t$$ somewhere close to 1 in practice.
+In this sense, we would like $$\sqrt{\alpha_t} < 1$$, but we want to keep small regression tasks as simple as possible - not lose too much information at each step. So we might want to have $$\sqrt{\alpha_t}$$ somewhere close to 1 in practice.
 
-As long as $$\lambda_t < 1$$, for $$T \rightarrow \infty$$, we are guaranteed to get $$x^{(T)}$$ as pure noise! - a perfect blank canvas for an ML model.
+As long as $$\sqrt{\alpha_t} < 1$$, for $$T \rightarrow \infty$$, we are guaranteed to get $$x^{(T)}$$ as pure noise! - a perfect blank canvas for an ML model.
 
 Similarly for $$\sigma_t$$, this controls the amount of noise that is added at each step. Something we might want to put $$\sim 0$$ for the same reasons as above.
 
-A common choice is to set $$\sigma_t^2 = 1 - \lambda_t^2$$, which for now we will motivate by saying that when $$\lambda_t \ge 1$$, $$\sigma_t^2 \ge 0$$. But it is actually theoretically justified by guaranteeing that $$\mathbb{E}_{q(x^{(t)})}[x^{(t)}] = 0$$ and $$\mathbb{E}_{q(x^{(t)})}[(x^{(t)})^2] = 1$$.
+A common choice is to set $$\sigma_t^2 = 1 - \alpha_t$$, which for now we will motivate by saying that when $$\sqrt{\alpha_t} \ge 1$$, $$\sigma_t^2 \ge 0$$. But it is actually theoretically justified by guaranteeing that $$\mathbb{E}_{q(x^{(t)})}[x^{(t)}] = 0$$ and $$\mathbb{E}_{q(x^{(t)})}[(x^{(t)})^2] = 1$$.
 
 ### Variance Preserving Process
 
-Aside: $$\sigma_t^2 = 1 - \lambda^2_t$$ ensures that $$\mathbb{E}_{q(x^{(t)})}[x^{(t)}] = 0$$ and $$\mathbb{E}_{q(x^{(t)})}[(x^{(t)})^2] = 1$$.
+Aside: $$\sigma_t^2 = 1 - \alpha_t$$ ensures that $$\mathbb{E}_{q(x^{(t)})}[x^{(t)}] = 0$$ and $$\mathbb{E}_{q(x^{(t)})}[(x^{(t)})^2] = 1$$.
 
 We know that the data satisfies:
 
@@ -158,13 +179,13 @@ $$
 because it can be normalised to do so. So let's consider $$x^{(1)}$$:
 
 $$
-\mathbb{E}_{q(x^{(1)})}[x^{(1)}] = \mathbb{E}[\lambda_1 x^{(0)} + \sigma_1 \epsilon_1] = \lambda_1 \mathbb{E}[x^{(0)}] + \sigma_1 \mathbb{E}[\epsilon_1] = 0
+\mathbb{E}_{q(x^{(1)})}[x^{(1)}] = \mathbb{E}[\sqrt{\alpha_1}\ x^{(0)} + \sigma_1 \epsilon_1] = \sqrt{\alpha_1}\ \mathbb{E}[x^{(0)}] + \sigma_1 \mathbb{E}[\epsilon_1] = 0
 $$
 
 because $$\epsilon_1 \sim \mathcal{N}(0, 1)$$. And also:
 
 $$
-\mathbb{E}_{q(x^{(1)})}[(x^{(1)})^2] = \mathbb{E}[\lambda_1^2 (x^{(0)})^2 + \sigma_1^2 \epsilon_1^2] = \lambda_1^2 \mathbb{E}[(x^{(0)})^2] + \sigma_1^2 \mathbb{E}[\epsilon_1^2] = \lambda_1^2 + \sigma_1^2 \\ \therefore \mathbb{E}_{q(x^{(1)})}[(x^{(1)})^2] = 1 \iff \sigma_1^2 = 1-\lambda_1^2
+\mathbb{E}_{q(x^{(1)})}[(x^{(1)})^2] = \mathbb{E}[\alpha_1 (x^{(0)})^2 + \sigma_1^2 \epsilon_1^2] = \alpha_1 \mathbb{E}[(x^{(0)})^2] + \sigma_1^2 \mathbb{E}[\epsilon_1^2] = \alpha_1 + \sigma_1^2 \\ \therefore \mathbb{E}_{q(x^{(1)})}[(x^{(1)})^2] = 1 \iff \sigma_1^2 = 1-\alpha_1
 $$
 
 By recursion, we can see that this is true for all $$t$$.
@@ -172,7 +193,7 @@ By recursion, we can see that this is true for all $$t$$.
 In this case, when the process is variance preserving, we can write down:
 
 $$
-q(x^{(t)}\vert x^{(0)}) = \mathcal{N}(x^{(t)}; \prod_{i=1}^{t} \lambda_{i} x^{(0)}, 1 - \prod_{i=1}^{t}\lambda_t^2)
+q(x^{(t)}\vert x^{(0)}) = \mathcal{N}(x^{(t)}; \prod_{i=1}^{t} \sqrt{\alpha_{i}}\ x^{(0)}, 1 - \prod_{i=1}^{t}\alpha_i)
 $$
 
 which can be proved by unrolling $$q(x^{(t)}\vert x^{(t-1)})$$, if you fancy doing some rather laborious maths.
@@ -281,14 +302,14 @@ This method involves looking at the noising step $$q(x^{(t-1)}\vert x^{(0)}, x^{
 
 $$
 q(x^{(t-1)}\vert x^{(0)}, x^{(t)}) \propto q(x^{(t-1)}\vert x^{(0)})q(x^{(t)}\vert x^{(t-1)})  \\
-= \mathcal{N}\left( x^{(t-1)};\ \left(\prod_{t^\prime = 1}^{t-1} \lambda_{t^\prime} x^{(0)} \right),\ 1 - \prod_{t^\prime = 1}^{t-1} \lambda_{t^{\prime}}^{2} \right) \times \mathcal{N}(x^{(t)};\ \lambda_t x^{(t-1)}, \ 1-\lambda_t^2)
+= \mathcal{N}\left( x^{(t-1)};\ \left(\prod_{t^\prime = 1}^{t-1} \sqrt{\alpha}_{t^\prime} x^{(0)} \right),\ 1 - \prod_{t^\prime = 1}^{t-1} \alpha_{t^{\prime}} \right) \times \mathcal{N}(x^{(t)};\ \sqrt{\alpha_t} x^{(t-1)}, \ 1-\alpha_t)
 $$
 
 then completing the square and doing some mathematical gymnastics gives us a new distribution $$q(x^{(t-1)}\vert x^{(0)}, x^{(t)}) = \mathcal{N}(x^{(t-1)}; \mu_{t-1\vert 0,t}, \sigma_{t-1\vert 0,t}^{2})$$ where:
 
 $$
-\mu_{t-1\vert 0,t} = \frac{\left(\prod_{t^\prime = 1}^{t-1} \lambda_{t^\prime}\right)(1-\lambda_t^2)}{1 - \prod_{t^\prime = 1}^{t} \lambda^2_{t^\prime}} x^{(0)} + \frac{\left(1 - \prod_{t^\prime = 1}^{t-1} \lambda^2_{t^\prime}\right)\lambda_t}{1 - \prod_{t^\prime = 1}^{t} \lambda^2_{t^\prime}}x^{(t)} \\
-\sigma_{t-1\vert 0,t}^{2} = \frac{\left(1 - \prod_{t^\prime = 1}^{t-1} \lambda^2_{t^\prime}\right)(1 - \lambda_t^2)}{1 - \prod_{t^\prime = 1}^{t} \lambda^2_{t^\prime}}
+\mu_{t-1\vert 0,t} = \frac{\left(\prod_{t^\prime = 1}^{t-1} \sqrt{\alpha_{t^\prime}}\right)(1-\alpha_t)}{1 - \prod_{t^\prime = 1}^{t} \alpha_{t^\prime}} x^{(0)} + \frac{\left(1 - \prod_{t^\prime = 1}^{t-1} \alpha_{t^\prime}\right)\sqrt{\alpha_t}}{1 - \prod_{t^\prime = 1}^{t} \alpha_{t^\prime}}x^{(t)} \\
+\sigma_{t-1\vert 0,t}^{2} = \frac{\left(1 - \prod_{t^\prime = 1}^{t-1} \alpha_{t^\prime}\right)(1 - \alpha_t)}{1 - \prod_{t^\prime = 1}^{t} \alpha_{t^\prime}}
 $$
 
 In the $$x^{(0)}$$-parameterisation, we do exactly what it says on the tin and parameterise $$x^{(0)}$$:
@@ -304,7 +325,7 @@ An alternative parameterisation to the above is found by instead aiming to predi
 If we cast our minds back to earlier, we had a noising schedule which can be written as:
 
 $$
-x^{(t)} = \prod_{t^\prime = 1}^{t} \lambda_{t^\prime} x^{(0)} + \sqrt{1-\prod_{t^\prime = 1}^{t}\lambda_{t^\prime}^{2}}\ \epsilon^{(t)} \qquad \epsilon^{(t)} \sim \mathcal{N}(0,1) \\
+x^{(t)} = \prod_{t^\prime = 1}^{t} \sqrt{\alpha}_{t^\prime} x^{(0)} + \sqrt{1-\prod_{t^\prime = 1}^{t}\alpha_{t^\prime}}\ \epsilon^{(t)} \qquad \epsilon^{(t)} \sim \mathcal{N}(0,1) \\
 x^{(t)} = c^{(t)} x^{(0)} + d^{(t)} \epsilon^{(t)}
 $$
 
@@ -357,7 +378,7 @@ Well, remember that $$q(x^{(t-1)}\vert x^{(0)}, x^{(t)})$$ is our noising proces
 In the $$\epsilon$$-parameterisation, the objective is to predict the noise added to the clean data $$x^{(0)}$$ to obtain the noisy data $$x^{(t)}$$. A neural network $$g_\theta$$ is trained to map the noisy input $$x^{(t)}$$ to the noise $$\epsilon:
 
 $$
-ϵ_{\theta} = g_{\theta}(x^{(t)})
+\epsilon_{\theta} = g_{\theta}(x^{(t)})
 $$
 
 As with our DAE discussion, lets have a look at a simple DSM training objective:
@@ -377,10 +398,10 @@ Anyway, score matching is an interesting topic which I'm not going to dwell too 
 OK, we've been around the block a bit and discussed some technical stuff, but just to wrap up this post, I'm going to drop a loss function here which was introduced by Ho, et. al., (2020) in the seminal paper on denoising diffusion models:
 
 $$
-\mathcal{L}(\theta) = -\frac{T}{2}\mathbb{E}_{t}\left[\left(\epsilon^{(t)} - \epsilon^{(t)}_{\theta}(\Lambda_t x^{(0)} + \sqrt{1-\Lambda^{2}_t} \epsilon^{(t)}, t-1)\right)^2\right]
+\mathcal{L}(\theta) = -\frac{T}{2}\mathbb{E}_{t}\left[\left(\epsilon^{(t)} - \epsilon^{(t)}_{\theta}(\sqrt{\alpha_t} x^{(0)} + \sqrt{1-\bar{\alpha}_t} \epsilon^{(t)}, t-1)\right)^2\right]
 $$
 
-where $$\Lambda_t = \prod_{t^\prime=1}^{t}\lambda_{t^\prime}$$. Hopefully, you are able to see that this loss function follows quite nicely from some of the discussions we have had in earlier sections.
+where $$\bar{\alpha}_{t} = \prod_{t^\prime=1}^{t}alpha_{t^\prime}$$. Hopefully, you are able to see that this loss function follows quite nicely from some of the discussions we have had in earlier sections.
 
 OK, great! Thanks for reading this post, if you have made it this far! Although technical, I hope it has given you a bit more of an intuitive explanation behind some of the main mathematical concepts of diffusion models.
 
