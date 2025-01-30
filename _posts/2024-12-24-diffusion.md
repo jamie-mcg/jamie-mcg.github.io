@@ -67,7 +67,7 @@ Right, before we get confused, lets add to our math we had earlier, just so we c
 
 Let our data be $$x^{(0)}$$ and our starting point (blank page/random vector) be $$x^{(T)}$$. Apologies for the cryptic notation, I promise this notation will become clearer later...
 
-The problem we have set up is $$x^{(0)} \sim p(x^{(0)} \bar x^{(T)})$$ as an approximation to $$x ~ q(x)$$.
+The problem we have set up is $$x^{(0)} \sim p(x^{(0)} \vert x^{(T)})$$ as an approximation to $$x ~ q(x)$$.
 
 Hmm... this still seems super hard though, right? If I asked you to go from a blank page to a masterpiece in a single step, unless you were Picasso, you would quite clearly struggle. So let's break it up, step-by-step.
 
