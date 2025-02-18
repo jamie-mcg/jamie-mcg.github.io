@@ -84,8 +84,24 @@ Here, activations and parameters are sharded across the model dimension. In betw
 - This unlocks a smaller efficient batch size per pod.
 - The forward pass steps include AllGathering the activations, performing the computation, then reduce scattering the output activations
 - The backwards pass includes an AllGather on the output and saved input, then performing a ReduceScatter on the final gradient at the input.
-- $$
+
+### Mixing FSDP & Model Parallelism
+
+- These two can be combined
+- We can shard the weights along both axes and the batch along the first
+- This reduces the size of the model AllGathers while also reducing the communication overhead of FSDP
+- Combining the two can get to lower effective batch sizes
+- FSDP moves the weights and model parallelism moves the activations
+- As our batch size shrinks, the model parallelism becomes cheaper because our activations per-shard are smaller.
+- Can get a rough factor of 2 smaller batch size than pure data parallel methods and still be compute bound
 
 ### Pipeline Parallelism
 
 The idea of pipeline parallelism is to shard the model across its layer dimension.
+
+- Split the layers across devices
+- Pass activations between devices
+- Do the same in reverse for the backwards pass
+- This allows for training very large models, but leaves devices idle for long time periods
+- Can mitigate this with microbatching
+- Can also carefully overlap the forward matmuls and backward matmuls - typically by prioritising the backward pass derivative computations such to not block earlier devices and layers.
