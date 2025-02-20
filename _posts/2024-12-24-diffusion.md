@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A Technical Introduction to Diffusion Models
-date: 2025-12-24 11:12:00-0400
+date: 2025-01-31 11:12:00-0400
 description: A comprehensive look at the theory and concepts underpinning diffusion models.
 tags: math diffusion
 categories: "deep learning"
