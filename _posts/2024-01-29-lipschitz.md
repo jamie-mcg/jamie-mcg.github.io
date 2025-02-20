@@ -6,7 +6,7 @@ description: All the math and intuition you need to know for a happy life.
 tags: math
 categories: mathematics
 related_posts: false
-featured: true
+featured: false
 ---
 
 ## Introduction
