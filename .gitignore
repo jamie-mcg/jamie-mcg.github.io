@@ -128,6 +128,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.python-version
 
 env_acp.sh
 
